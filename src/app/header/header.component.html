@@ -1,0 +1,67 @@
+<!--<nav class="d-inline-block rounded text-bg-primary mt-2 me-auto">-->
+<!--  <div class="container">-->
+<!--    <a class=" btn btn-primary" href="#">DoConnect QnA Forum</a>-->
+<!--      <button class="btn btn-primary">-->
+<!--        <i class="bi bi-file-earmark-plus"></i>-->
+<!--        Create Question-->
+<!--      </button>-->
+<!--      <button class="btn btn-primary">-->
+<!--        <i class="bi bi-search"></i>-->
+<!--        Search Question-->
+<!--      </button>-->
+<!--      <button class="btn btn-primary">-->
+<!--        <i class="bi bi-chat-dots-fill"></i>-->
+<!--        Chat With Us-->
+<!--      </button>-->
+<!--      <button class="btn btn-primary">-->
+<!--        Sign Out-->
+<!--      </button>-->
+<!--      <button class="btn btn-primary opacity-100" disabled>{{user.username}}</button>-->
+<!--    </div>-->
+<!--</nav>-->
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto text-light text-decoration-none">
+      <span class="fs-4">DoConnect QnA Forum</span>
+    </a>
+    <div class="float-end" [hidden]="!isLoggedIn">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-file-earmark-plus"></i>
+            Create Question
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-search"></i>
+            Search Question
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-chat-dots-fill"></i>
+            Chat With Us
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link text-light" (click)="signout()" href="#">Sign Out</a></li>
+        <li class="nav-item"><a class="nav-link text-light">{{user.username}}</a></li>
+      </ul>
+    </div>
+    <div class="float-end" [hidden]="isLoggedIn">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-house"></i>
+            Home
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-light" (click)="login()" href="#">
+            Login / Sign Up
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+</div>
