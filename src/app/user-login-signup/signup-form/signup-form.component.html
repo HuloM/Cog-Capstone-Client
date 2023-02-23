@@ -1,0 +1,32 @@
+<main class=" w-100 m-auto">
+  <form>
+    <h1 class="h3 mb-3 fw-normal text-light">Sign Up</h1>
+
+    <div class="form-floating my-1">
+      <input type="text" class="form-control" id="floatingName"
+        placeholder="name" name="name" [(ngModel)]="name">
+      <label for="floatingName">Name</label>
+    </div>
+    <div class="form-floating my-1">
+      <input type="text" class="form-control" id="floatingUsername"
+        placeholder="username" name="username" [(ngModel)]="username">
+      <label for="floatingUsername">Username</label>
+    </div>
+    <div class="form-floating my-1">
+      <input type="email" class="form-control" id="floatingEmail"
+        placeholder="name@example.com" name="email" [(ngModel)]="email">
+      <label for="floatingEmail">Email address</label>
+    </div>
+    <div class="form-floating my-1">
+      <input type="password" class="form-control" id="floatingPassword"
+        placeholder="Password" name="password" [(ngModel)]="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating mb-3 my-1">
+      <input type="password" class="form-control" id="floatingConfirmPassword"
+        placeholder="Password" name="confirmPassword" [(ngModel)]="confirmPassword">
+      <label for="floatingConfirmPassword">Confirm Password</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" (click)="signup()">Sign Up</button>
+  </form>
+</main>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -8,6 +9,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { AnswerFormComponent } from './answer-form/answer-form.component';
 import { QuestionPageComponent } from './question-page/question-page.component';
+import { SignupFormComponent } from './user-login-signup/signup-form/signup-form.component';
+import { LoginFormComponent } from './user-login-signup/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -17,10 +20,13 @@ import { QuestionPageComponent } from './question-page/question-page.component';
     LandingPageComponent,
     QuestionFormComponent,
     AnswerFormComponent,
-    QuestionPageComponent
+    QuestionPageComponent,
+    SignupFormComponent,
+    LoginFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
