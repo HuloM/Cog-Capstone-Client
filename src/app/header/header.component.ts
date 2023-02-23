@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = true;
   user = {
     username: 'matt',
-    roleType: 'admin'
+    roleType: 'admin',
   }
   isAdmin: boolean = this.user.roleType === 'admin';
 
