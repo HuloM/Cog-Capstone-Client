@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   isLoggedIn: boolean = false;
   user = {
-    username: 'matt'
+    username: 'matt',
+    roleType: 'admin'
   }
+  isAdmin: boolean = this.user.roleType === 'admin';
 
   login = () => {
     this.isLoggedIn = true;

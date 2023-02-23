@@ -24,7 +24,7 @@
     <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto text-light text-decoration-none">
       <span class="fs-4">DoConnect QnA Forum</span>
     </a>
-    <div class="float-end" [hidden]="!isLoggedIn">
+    <div class="float-end" *ngIf="isLoggedIn && !isAdmin">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="#" class="nav-link text-light">
@@ -48,7 +48,7 @@
         <li class="nav-item"><a class="nav-link text-light">{{user.username}}</a></li>
       </ul>
     </div>
-    <div class="float-end" [hidden]="isLoggedIn">
+    <div class="float-end" *ngIf="!isLoggedIn">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="#" class="nav-link text-light">
@@ -61,6 +61,29 @@
             Login / Sign Up
           </a>
         </li>
+      </ul>
+    </div>
+    <div class="float-end" *ngIf="isLoggedIn && isAdmin">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-question"></i>
+            Pending Question
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">
+            <i class="bi bi-lightbulb"></i>
+            Pending Answer
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-light" (click)="login()" href="#">
+            Login / Sign Up
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link text-light" (click)="signout()" href="#">Sign Out</a></li>
+        <li class="nav-item"><a class="nav-link text-light">{{user.username}}</a></li>
       </ul>
     </div>
   </header>
