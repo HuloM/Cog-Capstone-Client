@@ -1,0 +1,38 @@
+<div class="container">
+  <main class=" w-100 m-auto">
+    <form>
+      <h1 class="h3 mb-3 fw-normal text-light">Create New Question</h1>
+      <div class="form-floating my-1">
+        <input type="text" class="form-control" id="floatingName"
+               placeholder="name" name="name" [(ngModel)]="title">
+        <label for="floatingName">Title</label>
+      </div>
+      <div class="form-floating my-1">
+        <select class="form-control" id="floatingUsername"
+               placeholder="username" name="username" [(ngModel)]="topic">
+          <option value="1">Java</option>
+          <option value="2">Python</option>
+          <option value="3">C++</option>
+          <option value="4">C#</option>
+          <option value="5">JavaScript</option>
+          <option value="6">PHP</option>
+          <option value="7">Server</option>
+        </select>
+        <label for="floatingUsername">topic</label>
+      </div>
+      <div class="form-floating my-1">
+        <textarea rows="5" class="form-control" id="floatingDescription"
+                  placeholder="Description" name="description" [(ngModel)]="description">
+          </textarea>
+        <label for="floatingDescription">Description</label>
+      </div>
+      <div class="form-floating my-1">
+        <input class="form-control" type="file"
+               (change)="onChange($event)" id="fileUpload"
+        >
+        <label for="fileUpload">File</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary">Upload</button>
+    </form>
+  </main>
+</div>

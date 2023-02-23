@@ -9,9 +9,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 import { AnswerFormComponent } from './question-page/answer-form/answer-form.component';
 import { QuestionPageComponent } from './question-page/question-page.component';
-import { SignupFormComponent } from './user-login-signup/signup-form/signup-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginFormComponent } from './user-login-signup/login-form/login-form.component';
 import { SearchQuestionComponent } from './search-question/search-question.component';
+import { AdminSignupComponent } from './admin-signup/admin-signup.component';
+import { QuestionsTableComponent } from './search-question/questions-table/questions-table.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SearchQuestionComponent } from './search-question/search-question.compo
     QuestionPageComponent,
     SignupFormComponent,
     LoginFormComponent,
-    SearchQuestionComponent
+    SearchQuestionComponent,
+    AdminSignupComponent,
+    QuestionsTableComponent
   ],
   imports: [
     BrowserModule,

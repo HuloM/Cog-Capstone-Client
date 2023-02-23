@@ -20,4 +20,8 @@ export class HeaderComponent {
   signout = () => {
     this.isLoggedIn = false;
   }
+
+  adminSignup = () => {
+
+  }
 }
