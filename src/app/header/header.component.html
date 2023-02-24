@@ -4,7 +4,8 @@
     <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto text-light text-decoration-none">
       <span class="fs-4">DoConnect QnA Forum</span>
     </a>
-    <div class="float-end" *ngIf="isLoggedIn && !isAdmin">
+    <div class="float-end" *ngIf="this.authenticationService.isLoggedIn
+    && !this.authenticationService.isAdmin">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="/createQuestion" class="nav-link text-light">
@@ -24,11 +25,13 @@
             Chat With Us
           </a>
         </li>
-        <li class="nav-item"><a class="nav-link text-light" (click)="signout()" href="/authentication">Sign Out</a></li>
-        <li class="nav-item"><a class="nav-link text-light">{{user.username}}</a></li>
+        <li class="nav-item"><a class="nav-link text-light"
+                                href="/authentication" (click)="signout()">Sign Out</a></li>
+        <li class="nav-item"><a class="nav-link text-light">
+          {{this.authenticationService?.user?.username}}</a></li>
       </ul>
     </div>
-    <div class="float-end" *ngIf="!isLoggedIn">
+    <div class="float-end" *ngIf="!this.authenticationService.isLoggedIn">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="/" class="nav-link text-light">
@@ -43,7 +46,8 @@
         </li>
       </ul>
     </div>
-    <div class="float-end" *ngIf="isLoggedIn && isAdmin">
+    <div class="float-end" *ngIf="this.authenticationService.isLoggedIn
+    && this.authenticationService.isAdmin">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a href="/pendingQuestion" class="nav-link text-light">
@@ -62,8 +66,10 @@
             Sign Up
           </a>
         </li>
-        <li class="nav-item"><a class="nav-link text-light" (click)="signout()" href="/authentication">Sign Out</a></li>
-        <li class="nav-item"><a class="nav-link text-light">{{user.username}}</a></li>
+        <li class="nav-item"><a class="nav-link text-light"
+                                href="/authentication" (click)="signout()">Sign Out</a></li>
+        <li class="nav-item"><a class="nav-link text-light">
+          {{this.authenticationService?.user?.username}}</a></li>
       </ul>
     </div>
   </header>

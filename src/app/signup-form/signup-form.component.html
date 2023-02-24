@@ -1,31 +1,87 @@
 <main class=" w-100 m-auto">
-  <form>
+  <form [formGroup]="signupForm">
     <h1 class="h3 mb-3 fw-normal text-light">Sign Up</h1>
     <div class="form-floating my-1">
-      <input type="text" class="form-control" id="floatingName"
-        placeholder="name" name="name" [(ngModel)]="name">
-      <label for="floatingName">Name</label>
+      <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
+           class="text-danger">
+        <div *ngIf="signupForm.get('name')?.errors?.['required']">
+          Name is required.
+        </div>
+        <div *ngIf="signupForm.get('name')?.errors?.['minlength']">
+          Name must be at least 2 characters long.
+        </div>
+      </div>
+      <input type="text" class="form-control" id="name"
+             [ngClass]="{'border-danger': signupForm.get('name')?.invalid && signupForm.get('name')?.touched}"
+             placeholder="name" name="name" formControlName="name" required>
+      <label for="name">Name</label>
     </div>
     <div class="form-floating my-1">
-      <input type="text" class="form-control" id="floatingUsername"
-        placeholder="username" name="username" [(ngModel)]="username">
-      <label for="floatingUsername">Username</label>
+      <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+           class="text-danger">
+        <div *ngIf="signupForm.get('username')?.errors?.['required']">
+          Username is required.
+        </div>
+        <div *ngIf="signupForm.get('username')?.errors?.['minlength']">
+          Username must be at least 2 characters long.
+        </div>
+      </div>
+      <input type="text" class="form-control" id="username"
+             [ngClass]="{'border-danger': signupForm.get('username')?.invalid && signupForm.get('username')?.touched}"
+             placeholder="username" name="username" formControlName="username" required>
+      <label for="username">Username</label>
     </div>
     <div class="form-floating my-1">
-      <input type="email" class="form-control" id="floatingEmail"
-        placeholder="name@example.com" name="email" [(ngModel)]="email">
-      <label for="floatingEmail">Email Address</label>
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+           class="text-danger">
+        <div *ngIf="signupForm.get('email')?.errors?.['required']">
+          email is required.
+        </div>
+        <div *ngIf="signupForm.get('email')?.errors?.['minlength']">
+          email must be at least 2 characters long.
+        </div>
+        <div *ngIf="signupForm.get('email')?.errors?.['email']">
+          email must be a valid email.
+        </div>
+      </div>
+      <input type="email" class="form-control border" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+             placeholder="name@example.com" name="email" formControlName="email" required
+             [ngClass]="{'border-danger': signupForm.get('email')?.invalid && signupForm.get('email')?.touched}">
+      <label for="email">Email Address</label>
     </div>
     <div class="form-floating my-1">
-      <input type="password" class="form-control" id="floatingPassword"
-        placeholder="Password" name="password" [(ngModel)]="password">
-      <label for="floatingPassword">Password</label>
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+           class="text-danger">
+        <div *ngIf="signupForm.get('password')?.errors?.['required']">
+          Password is required.
+        </div>
+        <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+          Password must be at least 8 characters long.
+        </div>
+      </div>
+      <input type="password" class="form-control" id="password"
+             placeholder="Password" name="password" formControlName="password" required
+             [ngClass]="{'border-danger': signupForm.get('password')?.invalid && signupForm.get('password')?.touched}">
+      <label for="password">Password</label>
     </div>
     <div class="form-floating mb-3 my-1">
-      <input type="password" class="form-control" id="floatingConfirmPassword"
-        placeholder="Password" name="confirmPassword" [(ngModel)]="confirmPassword">
-      <label for="floatingConfirmPassword">Confirm Password</label>
+      <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+           class="text-danger">
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">
+          Confirm Password is required.
+        </div>
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']">
+          Confirm Password must be at least 8 characters long.
+        </div>
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">
+          Password and Confirm Password do not match.
+        </div>
+      </div>
+      <input type="password" class="form-control" id="confirmPassword"
+             placeholder="Password" name="confirmPassword" formControlName="confirmPassword" required
+             [ngClass]="{'border-danger': signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched}">
+      <label for="confirmPassword">Confirm Password</label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" (click)="signup()">Sign Up</button>
+    <button class="w-100 btn btn-lg btn-primary" [disabled]="!signupForm.valid" (click)="signup($event)">Sign Up</button>
   </form>
 </main>
