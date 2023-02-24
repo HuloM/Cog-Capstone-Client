@@ -21,6 +21,7 @@ import {PendingAnswerComponent} from './pending-answer/pending-answer.component'
 import {ChatDirectoryComponent} from './chat-directory/chat-directory.component';
 import {DirectMessagesComponent} from './chat-directory/direct-messages/direct-messages.component';
 import {CookieService} from 'ngx-cookie-service'
+import {AuthenticationService} from './services/authentication.service'
 
 const appRoutes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -60,7 +61,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -42,13 +42,22 @@ export class SignupFormComponent {
 
   signup = (e: Event) => {
     e.preventDefault();
-    console.log(this.signupForm.value)
-    this.auth.signup({
-      name: this.signupForm.value.name,
-      username: this.signupForm.value.username,
-      email: this.signupForm.value.email,
-      password: this.signupForm.value.password,
-      confirmPassword: this.signupForm.value.confirmPassword
-    })
+    if(this.auth.isAdmin) {
+      this.auth.signupAdmin({
+        name: this.signupForm.value.name,
+        username: this.signupForm.value.username,
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        confirmPassword: this.signupForm.value.confirmPassword
+      })
+    } else {
+      this.auth.signup({
+        name: this.signupForm.value.name,
+        username: this.signupForm.value.username,
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        confirmPassword: this.signupForm.value.confirmPassword
+      })
+    }
   }
 }

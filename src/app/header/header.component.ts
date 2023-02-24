@@ -7,7 +7,9 @@ import {AuthenticationService} from '../services/authentication.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(public authenticationService: AuthenticationService) { }
+  constructor(public authenticationService: AuthenticationService) {
+    console.log(this.authenticationService.user)
+  }
 
   signout = () => {
     this.authenticationService.logout()
