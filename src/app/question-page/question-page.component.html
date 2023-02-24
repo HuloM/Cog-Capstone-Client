@@ -1,1 +1,43 @@
-<p>question-page works!</p>
+<div class="container text-light fs-3 border">
+  <div class="row border-bottom">
+    <div class="col-sm-3">
+      ID
+    </div>
+    <div class="col">
+      {{this.questionService.currQuestion.id}}
+    </div>
+  </div>
+  <div class="row border-bottom">
+    <div class="col-sm-3">
+      Title
+    </div>
+    <div class="col">
+      {{this.questionService.currQuestion.title}}
+    </div>
+  </div>
+  <div class="row border-bottom">
+    <div class="col-sm-3">
+      Topic
+    </div>
+    <div class="col">
+      {{this.questionService.currQuestion.topic}}
+    </div>
+  </div>
+  <div class="row border-bottom">
+    <div class="col-sm-3">
+      Description
+    </div>
+    <div class="col">
+      {{this.questionService.currQuestion.description_question}}
+    </div>
+  </div>
+  <div class="row border-bottom">
+    <div class="col-sm-3">
+      Image
+    </div>
+    <div class="col">
+      <img src="http://localhost:8080/api/v1/storage/getImage/{{image_src}}" alt=""
+           class="mt-3 h-75 w-75">
+    </div>
+  </div>
+</div>

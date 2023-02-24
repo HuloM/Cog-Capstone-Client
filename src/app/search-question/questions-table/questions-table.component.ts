@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router'
+import {QuestionService} from '../../services/question.service'
 
 @Component({
   selector: 'app-questions-table',
@@ -6,19 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./questions-table.component.css']
 })
 export class QuestionsTableComponent {
-  questions = [
-    {
-      id: 1,
-      title: "How to create a new Angular project?",
-      description: "I want to create a new Angular project. How do I do that?",
-      topic: "Angular",
-    },
-    {
-      id: 2,
-      title: "How to create a new React project?",
-      description: "I want to create a new React project. How do I do that?",
-      topic: "React",
-    },
-  ]
+  constructor(private router: Router, public questionService: QuestionService) {
+  }
 
+  async ngOnInit() {
+    this.questionService.getQuestions()
+  }
+
+  onHighlightQuestion(id: number) {
+    console.log(id)
+    localStorage.setItem('questionId', id.toString())
+    let question = this.questionService.questions.find(q => q.id === id)
+    localStorage.setItem('image_src', question!.image_src)
+    this.router.navigate(['/question'])
+  }
 }

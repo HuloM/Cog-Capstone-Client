@@ -1,38 +1,77 @@
 <div class="container">
   <main class=" w-100 m-auto">
-    <form>
-      <h1 class="h3 mb-3 fw-normal text-light">Create New Question</h1>
+    <form [formGroup]="questionForm">
+      <h1 class="h3 mb-3 fw-normal text-light">Upload a New Question</h1>
       <div class="form-floating my-1">
-        <input type="text" class="form-control" id="floatingName"
-               placeholder="name" name="name" [(ngModel)]="title">
-        <label for="floatingName">Title</label>
+        <div *ngIf="questionForm.get('title')?.invalid && questionForm.get('title')?.touched"
+             class="text-danger">
+          <div *ngIf="questionForm.get('title')?.errors?.['required']" class="fs-4 text-center">
+            Title is required.
+          </div>
+          <div *ngIf="questionForm.get('title')?.errors?.['minlength']" class="fs-4 text-center">
+            Title must be at least 10 characters long.
+          </div>
+        </div>
+        <input type="text" class="form-control" id="title"
+               [ngClass]="{'border-danger': questionForm.get('title')?.invalid && questionForm.get('title')?.touched}"
+               placeholder="name" name="name" formControlName="title" required>
+        <label for="title">Title</label>
       </div>
       <div class="form-floating my-1">
-        <select class="form-control" id="floatingUsername"
-               placeholder="username" name="username" [(ngModel)]="topic">
-          <option value="1">Java</option>
-          <option value="2">Python</option>
-          <option value="3">C++</option>
-          <option value="4">C#</option>
-          <option value="5">JavaScript</option>
-          <option value="6">PHP</option>
-          <option value="7">Server</option>
+        <div *ngIf="questionForm.get('topic')?.invalid && questionForm.get('topic')?.touched"
+             class="text-danger">
+          <div *ngIf="questionForm.get('topic')?.errors?.['required']" class="fs-4 text-center">
+            topic is required.
+          </div>
+        </div>
+        <select class="form-control" id="topic"
+                [ngClass]="{'border-danger': questionForm.get('topic')?.invalid && questionForm.get('topic')?.touched}"
+                placeholder="topic" name="topic" formControlName="topic" required>
+          <option value="Java">Java</option>
+          <option value="Python">Python</option>
+          <option value="C++">C++</option>
+          <option value="C#">C#</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="PHP">PHP</option>
+          <option value="Server">Server</option>
         </select>
-        <label for="floatingUsername">topic</label>
+        <label for="topic">Topic</label>
       </div>
       <div class="form-floating my-1">
-        <textarea rows="5" class="form-control" id="floatingDescription"
-                  placeholder="Description" name="description" [(ngModel)]="description">
-          </textarea>
-        <label for="floatingDescription">Description</label>
+        <div *ngIf="questionForm.get('description')?.invalid && questionForm.get('description')?.touched"
+             class="text-danger">
+          <div *ngIf="questionForm.get('description')?.errors?.['required']" class="fs-4 text-center">
+            description is required.
+          </div>
+          <div *ngIf="questionForm.get('description')?.errors?.['minlength']" class="fs-4 text-center">
+            email must be at least 25 characters long.
+          </div>
+        </div>
+        <textarea class="form-control border h-auto" id="description" rows="5"
+                  placeholder="" name="description" formControlName="description" required
+                  [ngClass]="{'border-danger': questionForm.get('email')?.invalid && questionForm.get('email')?.touched}">
+        </textarea>
+        <label for="description">Description</label>
       </div>
       <div class="form-floating my-1">
-        <input class="form-control" type="file"
-               (change)="onChange($event)" id="fileUpload"
-        >
-        <label for="fileUpload">File</label>
+        <div *ngIf="questionForm.get('file')?.invalid && questionForm.get('file')?.touched"
+             class="text-danger">
+          <div *ngIf="questionForm.get('file')?.errors?.['required']" class="fs-4 text-center">
+            File is required.
+          </div>
+          <div *ngIf="questionForm.get('file')?.errors?.['fileUploadFormat']" class="fs-4 text-center">
+            File must be a jpg, jpeg, or png.
+          </div>
+        </div>
+        <input type="file" class="form-control" id="file" accept="image/png, image/jpeg, image/jpg"
+               placeholder="" name="file" formControlName="file" required (change)="onChange($event)"
+               [ngClass]="{'border-danger': questionForm.get('file')?.invalid && questionForm.get('file')?.touched}">
+        <label for="file">File Upload (max size: 128kb)</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary">Upload</button>
+      <button class="w-100 btn btn-lg btn-primary"
+              [disabled]="!questionForm.valid" (click)="onUpload()">Upload
+      </button>
     </form>
   </main>
+
 </div>

@@ -4,10 +4,10 @@
     <div class="form-floating my-1">
       <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
            class="text-danger">
-        <div *ngIf="loginForm.get('username')?.errors?.['required']">
+        <div *ngIf="loginForm.get('username')?.errors?.['required']" class="fs-4 text-center">
           Username is required.
         </div>
-        <div *ngIf="loginForm.get('username')?.errors?.['minlength']">
+        <div *ngIf="loginForm.get('username')?.errors?.['minlength']" class="fs-4 text-center">
           Username must be at least 2 characters long.
         </div>
       </div>
@@ -19,10 +19,10 @@
     <div class="form-floating my-1">
       <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
            class="text-danger">
-        <div *ngIf="loginForm.get('password')?.errors?.['required']">
+        <div *ngIf="loginForm.get('password')?.errors?.['required']" class="fs-4 text-center">
           Password is required.
         </div>
-        <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+        <div *ngIf="loginForm.get('password')?.errors?.['minlength']" class="fs-4 text-center">
           Password must be at least 8 characters long.
         </div>
       </div>

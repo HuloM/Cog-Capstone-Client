@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import { QuestionService } from '../services/question.service';
 
 @Component({
   selector: 'app-question-page',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./question-page.component.css']
 })
 export class QuestionPageComponent {
+  image_src !: string
+  constructor(public questionService: QuestionService) {
+  }
+
+  async ngOnInit() {
+    const id = localStorage.getItem('questionId') ?
+      parseInt(localStorage.getItem('questionId')!) : 0
+    this.image_src = localStorage.getItem('image_src') ?
+      localStorage.getItem('image_src')! : ''
+    await this.questionService.getQuestionById(id)
+  }
 
 }

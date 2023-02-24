@@ -1,1 +1,40 @@
-<p>answer-form works!</p>
+<div class="container">
+  <main class=" w-100 m-auto">
+    <form [formGroup]="answerForm">
+      <h1 class="h3 mb-3 fw-normal text-light">Create an Answer</h1>
+      <div class="form-floating my-1">
+        <div *ngIf="answerForm.get('description')?.invalid && answerForm.get('description')?.touched"
+             class="text-danger">
+          <div *ngIf="answerForm.get('description')?.errors?.['required']" class="fs-4 text-center">
+            description is required.
+          </div>
+          <div *ngIf="answerForm.get('description')?.errors?.['minlength']" class="fs-4 text-center">
+            email must be at least 25 characters long.
+          </div>
+        </div>
+        <textarea class="form-control border h-auto" id="description" rows="5"
+                  placeholder="" name="description" formControlName="description" required
+                  [ngClass]="{'border-danger': answerForm.get('email')?.invalid && answerForm.get('email')?.touched}">
+        </textarea>
+        <label for="description">Description</label>
+      </div>
+      <div class="form-floating my-1">
+        <div *ngIf="answerForm.get('file')?.invalid && answerForm.get('file')?.touched"
+             class="text-danger">
+          <div *ngIf="answerForm.get('file')?.errors?.['required']" class="fs-4 text-center">
+            File is required.
+          </div>
+          <div *ngIf="answerForm.get('file')?.errors?.['fileUploadFormat']" class="fs-4 text-center">
+            File must be a jpg, jpeg, or png.
+          </div>
+        </div>
+        <input type="file" class="form-control" id="file" accept="image/png, image/jpeg, image/jpg"
+               placeholder="" name="file" formControlName="file" required
+               [ngClass]="{'border-danger': answerForm.get('file')?.invalid && answerForm.get('file')?.touched}">
+        <label for="file">File Upload</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" [disabled]="!answerForm.valid" (click)="onChange($event)">Sign Up</button>
+    </form>
+  </main>
+
+</div>

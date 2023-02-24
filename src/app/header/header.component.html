@@ -28,7 +28,7 @@
         <li class="nav-item"><a class="nav-link text-light"
                                 href="/authentication" (click)="signout()">Sign Out</a></li>
         <li class="nav-item"><a class="nav-link text-light">
-          {{this.authenticationService?.user?.username}}</a></li>
+          {{this.authenticationService.user?.username}}</a></li>
       </ul>
     </div>
     <div class="float-end" *ngIf="!this.authenticationService.isLoggedIn">
@@ -69,7 +69,7 @@
         <li class="nav-item"><a class="nav-link text-light"
                                 href="/authentication" (click)="signout()">Sign Out</a></li>
         <li class="nav-item"><a class="nav-link text-light">
-          {{authenticationService.user.username}}</a></li>
+          {{authenticationService.user?.username}}</a></li>
       </ul>
     </div>
   </header>

@@ -1,29 +1,29 @@
 <div class="container">
   <main class="w-100 m-auto">
-    <form>
+    <form [formGroup]="questionSearchForm">
       <div class="row">
         <div class="col-sm-2">
           <h2 class="h6 mb-3 fw-normal text-light">Search for a Question: </h2>
         </div>
         <div class="col-sm-2">
-          <div class="form-floating">
-            <select class="form-control rounded-5" id="floatingUsername"
-                    placeholder="username" name="username" [(ngModel)]="topic">
-              <option value="1">Java</option>
-              <option value="2">Python</option>
-              <option value="3">C++</option>
-              <option value="4">C#</option>
-              <option value="5">JavaScript</option>
-              <option value="6">PHP</option>
-              <option value="7">Server</option>
+          <div class="form-floating my-1">
+            <select class="form-control rounded-5" id="topic"
+                    placeholder="topic" name="topic" formControlName="topic">
+              <option value="Java">Java</option>
+              <option value="Python">Python</option>
+              <option value="C++">C++</option>
+              <option value="C#">C#</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="PHP">PHP</option>
+              <option value="Server">Server</option>
             </select>
-            <label for="floatingUsername">topic</label>
+            <label for="topic">Topic</label>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-floating">
             <input type="text" class="form-control rounded-5" id="floatingName"
-                   placeholder="name" name="name">
+                   placeholder="name" name="name" formControlName="search">
             <label for="floatingName">Question Search</label>
           </div>
         </div>

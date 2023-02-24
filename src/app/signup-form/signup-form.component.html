@@ -4,10 +4,10 @@
     <div class="form-floating my-1">
       <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
            class="text-danger">
-        <div *ngIf="signupForm.get('name')?.errors?.['required']">
+        <div *ngIf="signupForm.get('name')?.errors?.['required']" class="fs-4 text-center">
           Name is required.
         </div>
-        <div *ngIf="signupForm.get('name')?.errors?.['minlength']">
+        <div *ngIf="signupForm.get('name')?.errors?.['minlength']" class="fs-4 text-center">
           Name must be at least 2 characters long.
         </div>
       </div>
@@ -19,10 +19,10 @@
     <div class="form-floating my-1">
       <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
            class="text-danger">
-        <div *ngIf="signupForm.get('username')?.errors?.['required']">
+        <div *ngIf="signupForm.get('username')?.errors?.['required']" class="fs-4 text-center">
           Username is required.
         </div>
-        <div *ngIf="signupForm.get('username')?.errors?.['minlength']">
+        <div *ngIf="signupForm.get('username')?.errors?.['minlength']" class="fs-4 text-center">
           Username must be at least 2 characters long.
         </div>
       </div>
@@ -34,13 +34,13 @@
     <div class="form-floating my-1">
       <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
            class="text-danger">
-        <div *ngIf="signupForm.get('email')?.errors?.['required']">
+        <div *ngIf="signupForm.get('email')?.errors?.['required']" class="fs-4 text-center">
           email is required.
         </div>
-        <div *ngIf="signupForm.get('email')?.errors?.['minlength']">
+        <div *ngIf="signupForm.get('email')?.errors?.['minlength']" class="fs-4 text-center">
           email must be at least 2 characters long.
         </div>
-        <div *ngIf="signupForm.get('email')?.errors?.['email']">
+        <div *ngIf="signupForm.get('email')?.errors?.['email']" class="fs-4 text-center">
           email must be a valid email.
         </div>
       </div>
@@ -52,10 +52,10 @@
     <div class="form-floating my-1">
       <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
            class="text-danger">
-        <div *ngIf="signupForm.get('password')?.errors?.['required']">
+        <div *ngIf="signupForm.get('password')?.errors?.['required']" class="fs-4 text-center">
           Password is required.
         </div>
-        <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+        <div *ngIf="signupForm.get('password')?.errors?.['minlength']" class="fs-4 text-center">
           Password must be at least 8 characters long.
         </div>
       </div>
@@ -67,14 +67,14 @@
     <div class="form-floating mb-3 my-1">
       <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
            class="text-danger">
-        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']" class="fs-4 text-center">
           Confirm Password is required.
         </div>
-        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']">
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']" class="fs-4 text-center">
           Confirm Password must be at least 8 characters long.
         </div>
-        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">
-          Password and Confirm Password do not match.
+        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordsMatch']" class="fs-4 text-center">
+          Passwords do not match.
         </div>
       </div>
       <input type="password" class="form-control" id="confirmPassword"

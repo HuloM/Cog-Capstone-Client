@@ -28,13 +28,11 @@ export class AuthenticationService {
     password: string, confirmPassword: string}) => {
     this.http.post('http://localhost:8080/api/v1/user/register', user).subscribe((response: any) => {
       console.log(response)
-
     })
     this.router.navigate(['/authentication'])
   }
   signupAdmin = (admin: {name: string, username: string, email: string,
     password: string, confirmPassword: string}) => {
-    console.log(this.cookieService.get('token'))
     this.http.post('http://localhost:8080/api/v1/user/registerAdmin', admin, {
       headers: {
         'Authorization': '' + this.cookieService.get('token')
