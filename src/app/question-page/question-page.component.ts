@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { AnswerService } from '../services/answer.service';
 import { QuestionService } from '../services/question.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { QuestionService } from '../services/question.service';
 })
 export class QuestionPageComponent {
   image_src !: string
-  constructor(public questionService: QuestionService) {
+  constructor(public questionService: QuestionService, public answerService: AnswerService) {
   }
 
   async ngOnInit() {
@@ -16,7 +17,9 @@ export class QuestionPageComponent {
       parseInt(localStorage.getItem('questionId')!) : 0
     this.image_src = localStorage.getItem('image_src') ?
       localStorage.getItem('image_src')! : ''
-    await this.questionService.getQuestionById(id)
+    this.questionService.getQuestionById(id)
+    this.answerService.getAnswersByQuestionId(id)
+    console.log(this.answerService.answers)
   }
 
 }

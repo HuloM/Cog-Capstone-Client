@@ -16,7 +16,7 @@
                   placeholder="" name="description" formControlName="description" required
                   [ngClass]="{'border-danger': answerForm.get('email')?.invalid && answerForm.get('email')?.touched}">
         </textarea>
-        <label for="description">Description</label>
+        <label for="description" class="text-dark">Description</label>
       </div>
       <div class="form-floating my-1">
         <div *ngIf="answerForm.get('file')?.invalid && answerForm.get('file')?.touched"
@@ -30,10 +30,10 @@
         </div>
         <input type="file" class="form-control" id="file" accept="image/png, image/jpeg, image/jpg"
                placeholder="" name="file" formControlName="file" required
-               [ngClass]="{'border-danger': answerForm.get('file')?.invalid && answerForm.get('file')?.touched}">
-        <label for="file">File Upload</label>
+               [ngClass]="{'border-danger': answerForm.get('file')?.invalid && answerForm.get('file')?.touched}" (change)="onChange($event)">
+        <label for="file" class="text-dark">File Upload (max 128kb)</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" [disabled]="!answerForm.valid" (click)="onChange($event)">Sign Up</button>
+      <button class="w-100 btn btn-lg btn-primary" [disabled]="!answerForm.valid" (click)="onUpload()">Sign Up</button>
     </form>
   </main>
 
