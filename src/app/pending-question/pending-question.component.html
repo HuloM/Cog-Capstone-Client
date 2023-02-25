@@ -1,1 +1,23 @@
-<p>pending-question works!</p>
+<div class="container">
+  <table class="table text-light">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Topic</th>
+      <th scope="col">Title</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of this.questionService.questions">
+      <th scope="row">{{question.id}}</th>
+      <td>{{question.topic}}</td>
+      <td>{{question.title}}</td>
+      <td>
+        <button class="btn btn-primary my-1 w-100" (click)="onApproveQuestion(question.id)">Approve</button>
+        <br>
+        <button class="btn btn-primary w-100" (click)="onRejectQuestion(question.id)">Remove</button>
+      </td>
+    </tbody>
+  </table>
+</div>

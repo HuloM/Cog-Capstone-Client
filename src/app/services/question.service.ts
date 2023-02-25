@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {CookieService} from 'ngx-cookie-service'
+import {Router} from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class QuestionService {
   questions !: any[]
   currQuestion !: any
   currQuestionImage !: any
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
 
   }
 
@@ -51,7 +52,7 @@ export class QuestionService {
   }
   getQuestionsByTopic = (topic: string) => {
     if (this.cookieService.get('token')){
-      this.http.get(`http://localhost:8080/api/v1/question/getById/${topic}`, {
+      this.http.get(`http://localhost:8080/api/v1/question/getByTopic/${topic}`, {
         headers: {
           'Authorization': this.cookieService.get('token')
         }
@@ -62,7 +63,7 @@ export class QuestionService {
     }
   }
   createQuestion = (question: {description_question: string, topic: string, title: string, file: File}) => {
-    if (this.cookieService.get('token')){
+    if (this.cookieService.get('token')) {
       const form = new FormData()
       form.append('description_question', question.description_question)
       form.append('topic', question.topic)
@@ -71,13 +72,41 @@ export class QuestionService {
       form.append('created_by', localStorage.getItem('username') as string)
       form.append('file', question.file)
       this.http.post(`http://localhost:8080/api/v1/question/add`,
-        form,{
-        headers: {
-          'Authorization': this.cookieService.get('token')
-        }
-      }).subscribe((response: any) => {
+        form, {
+          headers: {
+            'Authorization': this.cookieService.get('token')
+          }
+        }).subscribe((response: any) => {
         this.questions = response.data
         console.log(this.questions)
+        this.router.navigate(['/question'])
+      })
+    }
+  }
+
+  approveQuestion(id: any) {
+    if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
+      this.http.post(`http://localhost:8080/api/v1/question/approve/${id}`,
+        { },{
+          headers: {
+            'Authorization': this.cookieService.get('token')
+          }
+        }).subscribe((response: any) => {
+        console.log(response)
+        this.router.navigate(['/pendingQuestion'])
+      })
+    }
+  }
+  deleteQuestion(id: any) {
+    if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
+      this.http.delete(`http://localhost:8080/api/v1/question/delete/${id}`,
+        {
+          headers: {
+            'Authorization': this.cookieService.get('token')
+          }
+        }).subscribe((response: any) => {
+        console.log(response)
+        this.router.navigate(['/pendingQuestion'])
       })
     }
   }
