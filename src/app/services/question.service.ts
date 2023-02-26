@@ -79,7 +79,7 @@ export class QuestionService {
         }).subscribe((response: any) => {
         this.questions = response.data
         console.log(this.questions)
-        this.router.navigate(['/question'])
+        this.router.navigate(['/search'])
       })
     }
   }
@@ -93,7 +93,7 @@ export class QuestionService {
           }
         }).subscribe((response: any) => {
         console.log(response)
-        this.router.navigate(['/pendingQuestion'])
+        window.location.reload()
       })
     }
   }
@@ -106,7 +106,7 @@ export class QuestionService {
           }
         }).subscribe((response: any) => {
         console.log(response)
-        this.router.navigate(['/pendingQuestion'])
+        window.location.reload()
       })
     }
   }

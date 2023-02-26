@@ -5,6 +5,9 @@
       <th scope="col">ID</th>
       <th scope="col">Topic</th>
       <th scope="col">Title</th>
+      <th scope="col">Image</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Date</th>
       <th scope="col">Action</th>
     </tr>
     </thead>
@@ -13,6 +16,9 @@
       <th scope="row">{{question.id}}</th>
       <td>{{question.topic}}</td>
       <td>{{question.title}}</td>
+      <td><img src="http://localhost:8080/api/v1/storage/getImage/{{question.image_src}}" width="100px" height="100px"></td>
+      <td>{{question.created_by}}</td>
+      <td>{{question.datetime}}</td>
       <td>
         <button class="btn btn-primary my-1 w-100" (click)="onApproveQuestion(question.id)">Approve</button>
         <br>

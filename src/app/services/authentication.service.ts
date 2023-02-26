@@ -70,5 +70,6 @@ export class AuthenticationService {
       username: '',
       roleType: ''
     }
+    this.router.navigate(['/authentication'])
   }
 }

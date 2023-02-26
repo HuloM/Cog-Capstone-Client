@@ -15,7 +15,7 @@ export class SignupFormComponent {
   signupForm !: FormGroup
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      name: new FormControl('test', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(2)
       ]),

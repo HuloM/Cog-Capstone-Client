@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {CookieService} from 'ngx-cookie-service'
+import {Router} from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnswerService {
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
   }
 
   answers !: any[]
@@ -30,6 +31,7 @@ export class AnswerService {
       }).subscribe((response: any) => {
         console.log(response)
       })
+    this.router.navigate(['/search'])
     }
   }
 
@@ -43,6 +45,46 @@ export class AnswerService {
         console.log(response)
         this.answers = response.data
       })
+    }
+  }
+
+  getAnswersNotApproved() {
+    if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
+      this.http.get(`http://localhost:8080/api/v1/answer/getAllNotApproved`, {
+        headers: {
+          'Authorization': this.cookieService.get('token')
+        }
+      }).subscribe((response: any) => {
+        console.log(response)
+        this.answers = response.data
+      })
+    }
+  }
+
+  approveAnswer(id: any) {
+    if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
+      this.http.post(`http://localhost:8080/api/v1/answer/approve/${id}`,
+        { },{
+          headers: {
+            'Authorization': this.cookieService.get('token')
+          }
+        }).subscribe((response: any) => {
+        console.log(response)
+        window.location.reload()
+      })
+    }
+  }
+  deleteAnswer(id: any) {
+    if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
+      this.http.delete(`http://localhost:8080/api/v1/answer/delete/${id}`,
+        {
+          headers: {
+            'Authorization': this.cookieService.get('token')
+          }
+        }).subscribe((response: any) => {
+        console.log(response)
+      })
+      window.location.reload()
     }
   }
 }
