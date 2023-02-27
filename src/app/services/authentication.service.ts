@@ -16,6 +16,9 @@ export class AuthenticationService {
       this.isAdmin = this.user.roleType === 'admin';
     }
   }
+
+  jsonWebToken !: string
+
   user: {username: string, roleType: string} = {
     username: '',
     roleType: ''
@@ -50,13 +53,16 @@ export class AuthenticationService {
     })
   }
 
-  login = (user: {username: string, password: string}) => {
+  login = (user: {username: string, password: string}, rememberMe: boolean) => {
     this.http.post('http://localhost:8080/api/v1/user/authenticate', user).subscribe((response: any) => {
       console.log(response)
       if (response.data.username) {
         this.user.username = response.data.username
         this.user.roleType = response.data.role
-        this.cookieService.set('token', 'Bearer ' + response.data.token)
+        this.jsonWebToken = 'Bearer ' + response.data.token
+        if(rememberMe) {
+          this.cookieService.set('token', 'Bearer ' + response.data.token)
+        }
         this.isLoggedIn = true;
         this.isAdmin = this.user.roleType === 'admin';
         localStorage.setItem('username', this.user.username)

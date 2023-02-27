@@ -1,7 +1,7 @@
 <div class="container bg-dark">
   <main class=" w-100 m-auto bg-dark">
     <form [formGroup]="chatForm">
-      <h1 class="h3 mb-3 fw-normal text-light">Create an Answer</h1>
+      <h1 class="h3 mb-3 fw-normal text-light">Send a Message</h1>
       <div class="form-floating my-1">
         <div *ngIf="chatForm.get('message')?.invalid && chatForm.get('message')?.touched"
              class="text-danger">

@@ -28,6 +28,6 @@ export class LoginFormComponent {
     this.auth.login({
       username: this.loginForm.value.username,
       password: this.loginForm.value.password
-    })
+    }, this.loginForm.value.rememberMe)
   }
 }

@@ -6,10 +6,10 @@
         <div *ngIf="answerForm.get('description')?.invalid && answerForm.get('description')?.touched"
              class="text-danger">
           <div *ngIf="answerForm.get('description')?.errors?.['required']" class="fs-4 text-center">
-            description is required.
+            answer is required.
           </div>
           <div *ngIf="answerForm.get('description')?.errors?.['minlength']" class="fs-4 text-center">
-            email must be at least 25 characters long.
+            answer must be at least 25 characters long.
           </div>
         </div>
         <textarea class="form-control border h-auto" id="description" rows="5"
