@@ -35,6 +35,7 @@ const appRoutes: Routes = [
   {path: 'pendingQuestion', component: PendingQuestionComponent},
   {path: 'pendingAnswer', component: PendingAnswerComponent},
   {path: 'chat', component: ChatDirectoryComponent},
+  {path: 'directMessage', component: DirectMessagesComponent}
 ]
 
 @NgModule({

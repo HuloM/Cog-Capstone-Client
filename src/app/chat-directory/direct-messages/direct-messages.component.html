@@ -1,1 +1,41 @@
-<p>direct-messages works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="text-bg-dark">From: {{messageReceiver}}</div>
+      <div *ngFor="let chat of chatService.chatsFromReceiver">
+        <div class="row rounded-pill p-3 text-bg-secondary text-start text-break text-wrap">
+          {{chat.message}}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="text-bg-dark">To: {{messageReceiver}}</div>
+      <div *ngFor="let chat of chatService.chatsToReceiver">
+        <div class=" my-3 row rounded-end text-bg-secondary text-start text-break text-wrap">
+          {{chat.message}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form [formGroup]="chatForm">
+      <div class="form-floating input-group rounded-5">
+        <div *ngIf="chatForm.get('message')?.invalid && chatForm.get('message')?.touched"
+             class="text-danger">
+          <div *ngIf="chatForm.get('message')?.errors?.['required']" class="fs-4 text-center">
+            message is required.
+          </div>
+          <div *ngIf="chatForm.get('message')?.errors?.['minlength']" class="fs-4 text-center">
+            message must be at least 3 characters long.
+          </div>
+        </div>
+        <textarea class="form-control border " id="message" rows="1"
+                  placeholder="" name="message" formControlName="message" required aria-describedby="button-addon2"
+                  [ngClass]="{'border-danger': chatForm.get('message')?.invalid && chatForm.get('message')?.touched}">
+        </textarea>
+        <label for="message" class="text-dark">Message</label>
+        <button id="button-addon2" class="btn btn-lg btn-primary" [disabled]="!chatForm.valid" (click)="onSend()">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
