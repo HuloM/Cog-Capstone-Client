@@ -3,7 +3,7 @@
     <div class="col">
       <div class="text-bg-dark">From: {{messageReceiver}}</div>
       <div *ngFor="let chat of chatService.chatsFromReceiver">
-        <div class="row rounded-pill p-3 text-bg-secondary text-start text-break text-wrap">
+        <div class="my-3 mx-2 row rounded-end text-bg-secondary text-start text-break text-wrap">
           {{chat.message}}
         </div>
       </div>
@@ -11,7 +11,7 @@
     <div class="col">
       <div class="text-bg-dark">To: {{messageReceiver}}</div>
       <div *ngFor="let chat of chatService.chatsToReceiver">
-        <div class=" my-3 row rounded-end text-bg-secondary text-start text-break text-wrap">
+        <div class=" my-3 mx-2 row rounded-end text-bg-secondary text-start text-break text-wrap">
           {{chat.message}}
         </div>
       </div>
