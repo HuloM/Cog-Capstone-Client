@@ -22,7 +22,8 @@ import {ChatDirectoryComponent} from './chat-directory/chat-directory.component'
 import {DirectMessagesComponent} from './chat-directory/direct-messages/direct-messages.component';
 import {CookieService} from 'ngx-cookie-service'
 import {AuthenticationService} from './services/authentication.service';
-import { QuestionAnswersComponent } from './question-page/question-answers/question-answers.component'
+import { QuestionAnswersComponent } from './question-page/question-answers/question-answers.component';
+import { ChatFormComponent } from './chat-directory/chat-form/chat-form.component'
 
 const appRoutes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     PendingAnswerComponent,
     ChatDirectoryComponent,
     DirectMessagesComponent,
-    QuestionAnswersComponent
+    QuestionAnswersComponent,
+    ChatFormComponent
   ],
   imports: [
     BrowserModule,

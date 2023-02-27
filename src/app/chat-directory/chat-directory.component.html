@@ -1,1 +1,10 @@
-<p>chat-directory works!</p>
+<div class="container bg-dark">
+  <div class="row">
+    <app-chat-form/>
+  </div>
+  <div *ngFor="let chat of chatService.chats" class="my-3 h-100 d-flex align-items-center justify-content-center">
+    <div class="row">
+      <a class="btn btn-primary w-50 rounded-5 m-auto mx-5" (click)="openChatWithReceiver(chat.to_user)">Chat with: {{chat.to_user}}</a>
+    </div>
+  </div>
+</div>
