@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {CookieService} from 'ngx-cookie-service'
-import {Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 import {AuthenticationService} from './authentication.service'
 
 @Injectable({
@@ -9,7 +9,7 @@ import {AuthenticationService} from './authentication.service'
 })
 export class AnswerService {
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private auth: AuthenticationService) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private auth: AuthenticationService, private route: ActivatedRoute) {
   }
 
   answers !: any[]
@@ -32,7 +32,10 @@ export class AnswerService {
       }).subscribe((response: any) => {
         console.log(response)
       })
-    this.router.navigate(['/search'])
+    this.router.navigate(['/search'], {
+      relativeTo: this.route,
+      skipLocationChange: true
+    })
     }
   }
 

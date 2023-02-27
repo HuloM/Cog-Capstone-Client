@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import {CookieService} from 'ngx-cookie-service'
-import {Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   constructor(private http: HttpClient, private cookieService: CookieService,
-  private router: Router) {
+  private router: Router, private route: ActivatedRoute) {
     console.log('auth service constructor')
     if(this.cookieService.get('jsonWebToken') !== '') {
       console.log('cookie exists')
@@ -32,8 +32,12 @@ export class AuthenticationService {
   signup = (user: {name: string, username: string, email: string,
     password: string, confirmPassword: string}) => {
     this.http.post('http://localhost:8080/api/v1/user/register', user).subscribe((response: any) => {
-      if (response.status === 200) {
-        window.location.reload()
+      console.log(response)
+      if (response.status === 201) {
+        this.router.navigate(['/authentication'], {
+          relativeTo: this.route,
+          skipLocationChange: true
+        })
       } else {
         alert(response.message)
       }
@@ -47,8 +51,11 @@ export class AuthenticationService {
       }
     }).subscribe((response: any) => {
 
-      if (response.status === 200) {
-        this.router.navigate(['/'])
+      if (response.status === 201) {
+        this.router.navigate(['/'], {
+          relativeTo: this.route,
+          skipLocationChange: true
+        })
       } else {
         alert(response.message)
       }
@@ -70,7 +77,10 @@ export class AuthenticationService {
         this.isAdmin = this.user.roleType === 'admin';
         localStorage.setItem('username', this.user.username)
         localStorage.setItem('roleType', this.user.roleType)
-        this.router.navigate(['/'])
+        this.router.navigate(['/'], {
+          relativeTo: this.route,
+          skipLocationChange: true
+        })
       } else {
         alert('Invalid credentials')
       }
@@ -88,6 +98,10 @@ export class AuthenticationService {
       username: '',
       roleType: ''
     }
-    this.router.navigate(['/authentication'])
+    this.router.navigate(['/authentication'], {
+        relativeTo: this.route,
+        skipLocationChange: true
+      }
+    )
   }
 }
