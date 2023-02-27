@@ -37,7 +37,12 @@ export class ChatService {
           'Authorization': this.cookieService.get('token')
         }
       }).subscribe((response: any) => {
-        console.log(response)
+        if(response.status === 200) {
+          window.location.reload()
+        }
+        else if(response.status === 400) {
+          alert(response.message)
+        }
       })
     }
   }

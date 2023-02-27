@@ -10,6 +10,7 @@ export class QuestionService {
   questions !: any[]
   currQuestion !: any
   currQuestionImage !: any
+
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
 
   }
@@ -21,8 +22,11 @@ export class QuestionService {
           'Authorization': this.cookieService.get('token')
         }
       }).subscribe((response: any) => {
-        console.log(response.data)
-        this.questions = response.data
+        if(response.status === 200) {
+          this.questions = response.data
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
@@ -33,36 +37,46 @@ export class QuestionService {
           'Authorization': this.cookieService.get('token')
         }
       }).subscribe((response: any) => {
-        this.questions = response.data
-        console.log(this.questions)
+        if(response.status === 200) {
+          this.questions = response.data
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
   getQuestionById = (id: number) => {
-    if (this.cookieService.get('token')){
+    if (this.cookieService.get('token')) {
       this.http.get(`http://localhost:8080/api/v1/question/getById/${id}`, {
         headers: {
           'Authorization': this.cookieService.get('token')
         }
       }).subscribe((response: any) => {
-        console.log(response.data)
-        this.currQuestion = response.data
+        if(response.status === 200) {
+          this.currQuestion = response.data
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
   getQuestionsByTopic = (topic: string) => {
-    if (this.cookieService.get('token')){
-      this.http.get(`http://localhost:8080/api/v1/question/getByTopic/${topic}`, {
+    if (this.cookieService.get('token')) {
+      console.log(topic)
+      this.http.get(`http://localhost:8080/api/v1/question/getByTopic?topic=${topic}`, {
         headers: {
           'Authorization': this.cookieService.get('token')
         }
       }).subscribe((response: any) => {
-        this.questions = response.data
-        console.log(this.questions)
+        if (response.status === 200) {
+          this.questions = response.data
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
-  createQuestion = (question: {description_question: string, topic: string, title: string, file: File}) => {
+  createQuestion = (question: { description_question: string, topic: string, title: string, file: File }) => {
     if (this.cookieService.get('token')) {
       const form = new FormData()
       form.append('description_question', question.description_question)
@@ -77,9 +91,12 @@ export class QuestionService {
             'Authorization': this.cookieService.get('token')
           }
         }).subscribe((response: any) => {
-        this.questions = response.data
-        console.log(this.questions)
-        this.router.navigate(['/search'])
+        if (response.status === 200) {
+          this.questions = response.data
+          this.router.navigate(['/search'])
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
@@ -87,16 +104,20 @@ export class QuestionService {
   approveQuestion(id: any) {
     if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
       this.http.post(`http://localhost:8080/api/v1/question/approve/${id}`,
-        { },{
+        {}, {
           headers: {
             'Authorization': this.cookieService.get('token')
           }
         }).subscribe((response: any) => {
-        console.log(response)
-        window.location.reload()
+        if(response.status === 200) {
+          window.location.reload()
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
+
   deleteQuestion(id: any) {
     if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
       this.http.delete(`http://localhost:8080/api/v1/question/delete/${id}`,
@@ -105,8 +126,45 @@ export class QuestionService {
             'Authorization': this.cookieService.get('token')
           }
         }).subscribe((response: any) => {
-        console.log(response)
-        window.location.reload()
+        if(response.status === 200) {
+          window.location.reload()
+        } else {
+          alert(response.message)
+        }
+      })
+    }
+  }
+
+  getQuestionsBySearchAndTopic(search: string, topic: string) {
+    if (this.cookieService.get('token')) {
+      console.log(topic)
+      this.http.get(`http://localhost:8080/api/v1/question/getByTopic?topic=${topic}&title=${search}`, {
+        headers: {
+          'Authorization': this.cookieService.get('token')
+        }
+      }).subscribe((response: any) => {
+        if (response.status === 200) {
+          this.questions = response.data
+        } else {
+          alert(response.message)
+        }
+      })
+    }
+  }
+
+  getQuestionsBySearch(search: string) {
+    if (this.cookieService.get('token')) {
+      this.http.get(`http://localhost:8080/api/v1/question/getLikeTitle?title=${search}`, {
+        headers: {
+          'Authorization': this.cookieService.get('token')
+        }
+      }).subscribe((response: any) => {
+        if (response.status === 200) {
+          console.log(response)
+          this.questions = response.data
+        } else {
+          alert(response.message)
+        }
       })
     }
   }

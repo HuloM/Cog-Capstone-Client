@@ -18,7 +18,7 @@
         </textarea>
         <label for="message" class="text-dark">Message</label>
       </div>
-      <div class="form-floating my-1">
+      <div class="my-1">
         <div *ngIf="chatForm.get('receiver')?.invalid && chatForm.get('receiver')?.touched"
              class="text-danger">
           <div *ngIf="chatForm.get('receiver')?.errors?.['required']" class="fs-4 text-center">
@@ -28,12 +28,14 @@
             receiver must be at least 3 characters long.
           </div>
         </div>
-        <input type="text" class="form-control border h-auto" id="receiver" rows="5"
-                  placeholder="" name="receiver" formControlName="receiver" required
-                  [ngClass]="{'border-danger': chatForm.get('receiver')?.invalid && chatForm.get('receiver')?.touched}">
-        <label for="receiver" class="text-dark">Send to</label>
+        <div class="form-floating input-group">
+          <input type="text" class="form-control border h-auto" id="receiver" rows="5"
+                 placeholder="" name="receiver" formControlName="receiver" required aria-describedby="button-addon2"
+                 [ngClass]="{'border-danger': chatForm.get('receiver')?.invalid && chatForm.get('receiver')?.touched}">
+          <label for="receiver" class="text-dark">Send to</label>
+          <button class="btn btn-lg btn-secondary" id="button-addon2" [disabled]="!chatForm.valid" (click)="onSend()">Send</button>
+        </div>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" [disabled]="!chatForm.valid" (click)="onSend()">Upload Answer</button>
     </form>
   </main>
 

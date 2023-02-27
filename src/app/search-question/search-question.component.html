@@ -9,6 +9,7 @@
           <div class="form-floating my-1">
             <select class="form-control rounded-5" id="topic"
                     placeholder="topic" name="topic" formControlName="topic">
+              <option value="All">All</option>
               <option value="Java">Java</option>
               <option value="Python">Python</option>
               <option value="C++">C++</option>
@@ -28,7 +29,7 @@
           </div>
         </div>
         <div class="col-sm-2 float-end h-auto">
-          <button class="w-auto btn btn-lg btn-primary rounded-5">Search</button>
+          <button class="w-auto btn btn-lg btn-primary rounded-5" (click)="onSubmit()">Search</button>
         </div>
       </div>
 

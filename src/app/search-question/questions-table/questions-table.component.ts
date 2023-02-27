@@ -12,7 +12,6 @@ export class QuestionsTableComponent {
   }
 
   async ngOnInit() {
-    this.questionService.getQuestions()
   }
 
   onHighlightQuestion(id: number) {
