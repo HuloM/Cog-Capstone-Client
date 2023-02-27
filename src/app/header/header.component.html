@@ -1,32 +1,32 @@
 <script src="../app.module.ts"></script>
 <div class="container">
   <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto text-light text-decoration-none">
+    <a class="d-flex mb-3 mb-md-0 me-md-auto text-light text-decoration-none" [routerLink]="['/']">
       <span class="fs-4">DoConnect QnA Forum</span>
     </a>
     <div class="float-end" *ngIf="this.authenticationService.isLoggedIn
     && !this.authenticationService.isAdmin">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a href="/createQuestion" class="nav-link text-light">
+          <a class="nav-link text-light" [routerLink]="['/createQuestion']">
             <i class="bi bi-file-earmark-plus"></i>
             Create Question
           </a>
         </li>
         <li class="nav-item">
-          <a href="/search" class="nav-link text-light">
+          <a class="nav-link text-light" [routerLink]="['/search']">
             <i class="bi bi-search"></i>
             Search Question
           </a>
         </li>
         <li class="nav-item">
-          <a href="/chat" class="nav-link text-light">
+          <a class="nav-link text-light" [routerLink]="['/chat']">
             <i class="bi bi-chat-dots-fill"></i>
             Chat With Us
           </a>
         </li>
         <li class="nav-item"><a class="nav-link text-light"
-                                href="/authentication" (click)="signout()">Sign Out</a></li>
+                                [routerLink]="['/authentication']" (click)="signout()">Sign Out</a></li>
         <li class="nav-item"><a class="nav-link text-light">
           {{this.authenticationService.user?.username}}</a></li>
       </ul>
@@ -34,14 +34,19 @@
     <div class="float-end" *ngIf="!this.authenticationService.isLoggedIn">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a href="/" class="nav-link text-light">
+          <a class="nav-link text-light" [routerLink]="['/']">
             <i class="bi bi-house"></i>
             Home
           </a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light" href="/authentication">
-            Login / Sign Up
+          <a class="nav-link text-light" [routerLink]="['/registration']">
+            Sign Up
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-light" [routerLink]="['/authentication']">
+            Login
           </a>
         </li>
       </ul>
@@ -50,24 +55,24 @@
     && this.authenticationService.isAdmin">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a href="/pendingQuestion" class="nav-link text-light">
+          <a [routerLink]="['/pendingQuestion']" class="nav-link text-light">
             <i class="bi bi-question"></i>
             Pending Question
           </a>
         </li>
         <li class="nav-item">
-          <a href="/pendingAnswer" class="nav-link text-light">
+          <a [routerLink]="['/pendingAnswer']" class="nav-link text-light">
             <i class="bi bi-lightbulb"></i>
             Pending Answer
           </a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link text-light" href="/adminSignup">
+          <a class="nav-link text-light" href="/adminSignup" [routerLink]="['/adminSignup']">
             Sign Up
           </a>
         </li>
         <li class="nav-item"><a class="nav-link text-light"
-                                href="/authentication" (click)="signout()">Sign Out</a></li>
+                                [routerLink]="['/authentication']" (click)="signout()">Sign Out</a></li>
         <li class="nav-item"><a class="nav-link text-light">
           {{authenticationService.user?.username}}</a></li>
       </ul>

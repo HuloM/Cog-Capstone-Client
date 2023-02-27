@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {CookieService} from 'ngx-cookie-service'
 import {Router} from '@angular/router'
+import {AuthenticationService} from './authentication.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnswerService {
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private auth: AuthenticationService) {
   }
 
   answers !: any[]
@@ -26,7 +27,7 @@ export class AnswerService {
     if (this.cookieService.get('token')) {
       this.http.post('http://localhost:8080/api/v1/answer/add', form, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
@@ -39,7 +40,7 @@ export class AnswerService {
     if (this.cookieService.get('token')) {
       this.http.get(`http://localhost:8080/api/v1/answer/getByQuestionId/${id}`, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
@@ -52,7 +53,7 @@ export class AnswerService {
     if (this.cookieService.get('token') && localStorage.getItem('roleType') === 'admin') {
       this.http.get(`http://localhost:8080/api/v1/answer/getAllNotApproved`, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
@@ -66,11 +67,14 @@ export class AnswerService {
       this.http.post(`http://localhost:8080/api/v1/answer/approve/${id}`,
         { },{
           headers: {
-            'Authorization': this.cookieService.get('token')
+            'Authorization': this.auth.jsonWebToken
           }
         }).subscribe((response: any) => {
-        console.log(response)
-        window.location.reload()
+        if(response.status === 200) {
+          this.getAnswersNotApproved()
+        } else {
+          alert(response.message)
+        }
       })
     }
   }
@@ -79,12 +83,15 @@ export class AnswerService {
       this.http.delete(`http://localhost:8080/api/v1/answer/delete/${id}`,
         {
           headers: {
-            'Authorization': this.cookieService.get('token')
+            'Authorization': this.auth.jsonWebToken
           }
         }).subscribe((response: any) => {
-        console.log(response)
+        if(response.status === 200) {
+          this.getAnswersNotApproved()
+        } else {
+          alert(response.message)
+        }
       })
-      window.location.reload()
     }
   }
 }

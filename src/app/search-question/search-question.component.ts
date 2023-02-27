@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {QuestionService} from '../services/question.service'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {FileUploadFormatValidator} from '../question-form/file-upload-format.directive'
+import {AuthenticationService} from '../services/authentication.service'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Component({
   selector: 'app-search-question',
@@ -9,12 +11,15 @@ import {FileUploadFormatValidator} from '../question-form/file-upload-format.dir
   styleUrls: ['./search-question.component.css']
 })
 export class SearchQuestionComponent {
-  constructor(private questionService: QuestionService) {
+  constructor(private questionService: QuestionService, private auth: AuthenticationService, private router: Router, private route: ActivatedRoute) {
   }
 
   questionSearchForm !: FormGroup
 
   ngOnInit() {
+    if (!this.auth.isLoggedIn || !this.auth.isAdmin) {
+      this.router.navigate(['/authentication'], {relativeTo: this.route, skipLocationChange: true})
+    }
     this.questionService.getQuestions()
     this.questionSearchForm = new FormGroup({
       search: new FormControl(''),

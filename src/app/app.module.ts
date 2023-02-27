@@ -31,6 +31,7 @@ const appRoutes: Routes = [
   {path: 'search', component: SearchQuestionComponent},
   {path: 'adminSignup', component: AdminSignupComponent},
   {path: 'authentication', component: UserLoginSignupComponent},
+  {path: 'registration', component: SignupFormComponent},
   {path: 'createQuestion', component: QuestionFormComponent},
   {path: 'pendingQuestion', component: PendingQuestionComponent},
   {path: 'pendingAnswer', component: PendingAnswerComponent},

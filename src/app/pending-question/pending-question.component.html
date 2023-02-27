@@ -20,9 +20,9 @@
       <td>{{question.created_by}}</td>
       <td>{{question.datetime}}</td>
       <td>
-        <button class="btn btn-secondary my-1 w-100" (click)="onApproveQuestion(question.id)">Approve</button>
+        <button class="btn btn-secondary my-1 w-100" (click)="onApproveQuestion(question.id)" type="button">Approve</button>
         <br>
-        <button class="btn btn-secondary w-100" (click)="onRejectQuestion(question.id)">Remove</button>
+        <button class="btn btn-secondary w-100" type="button" (click)="onRejectQuestion(question.id)">Remove</button>
       </td>
     </tbody>
   </table>

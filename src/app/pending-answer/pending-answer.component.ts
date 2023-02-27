@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AnswerService } from '../services/answer.service';
+import {AuthenticationService} from '../services/authentication.service'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Component({
   selector: 'app-pending-answer',
@@ -8,9 +10,12 @@ import { AnswerService } from '../services/answer.service';
 })
 export class PendingAnswerComponent {
 
-    constructor(public answerService: AnswerService) { }
+    constructor(public answerService: AnswerService, private auth: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
+        if (!this.auth.isLoggedIn || !this.auth.isAdmin) {
+          this.router.navigate(['/authentication'], {relativeTo: this.route, skipLocationChange: true})
+        }
         this.answerService.getAnswersNotApproved()
     }
 

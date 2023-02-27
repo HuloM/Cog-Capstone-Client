@@ -68,7 +68,7 @@
                [ngClass]="{'border-danger': questionForm.get('file')?.invalid && questionForm.get('file')?.touched}">
         <label for="file">File Upload (max size: 128kb)</label>
       </div>
-      <button class="w-100 btn btn-lg btn-secondary"
+      <button class="w-100 btn btn-lg btn-secondary" type="button"
               [disabled]="!questionForm.valid" (click)="onUpload()">Upload
       </button>
     </form>

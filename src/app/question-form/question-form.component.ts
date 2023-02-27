@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {QuestionService} from '../services/question.service'
 import {FileUploadFormatValidator} from './file-upload-format.directive'
+import {AuthenticationService} from '../services/authentication.service'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Component({
   selector: 'app-question-form',
@@ -9,13 +11,16 @@ import {FileUploadFormatValidator} from './file-upload-format.directive'
   styleUrls: ['./question-form.component.css']
 })
 export class QuestionFormComponent {
-  constructor(private questionService: QuestionService) {
+  constructor(private questionService: QuestionService, private auth: AuthenticationService, private router: Router, private route: ActivatedRoute) {
   }
   file !: File
   fileSize: number = 0
   questionForm !: FormGroup
 
   ngOnInit() {
+    if (!this.auth.isLoggedIn) {
+      this.router.navigate(['/authentication'], {relativeTo: this.route, skipLocationChange: true})
+    }
     this.questionForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,

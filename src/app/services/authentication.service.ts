@@ -9,7 +9,9 @@ import {Router} from '@angular/router'
 export class AuthenticationService {
   constructor(private http: HttpClient, private cookieService: CookieService,
   private router: Router) {
-    if(localStorage.getItem('username') && localStorage.getItem('roleType')) {
+    console.log('auth service constructor')
+    if(this.cookieService.get('jsonWebToken') !== '') {
+      console.log('cookie exists')
       this.user.username = localStorage.getItem('username') as string
       this.user.roleType = localStorage.getItem('roleType') as string
       this.isLoggedIn = true;
@@ -41,7 +43,7 @@ export class AuthenticationService {
     password: string, confirmPassword: string}) => {
     this.http.post('http://localhost:8080/api/v1/user/registerAdmin', admin, {
       headers: {
-        'Authorization': '' + this.cookieService.get('token')
+        'Authorization': '' + this.jsonWebToken
       }
     }).subscribe((response: any) => {
 
@@ -61,7 +63,8 @@ export class AuthenticationService {
         this.user.roleType = response.data.role
         this.jsonWebToken = 'Bearer ' + response.data.token
         if(rememberMe) {
-          this.cookieService.set('token', 'Bearer ' + response.data.token)
+          console.log('remember me')
+          this.cookieService.set('jsonWebToken', 'Bearer ' + response.data.token)
         }
         this.isLoggedIn = true;
         this.isAdmin = this.user.roleType === 'admin';
@@ -75,11 +78,12 @@ export class AuthenticationService {
   }
 
   logout = () => {
-    this.cookieService.delete('token')
+    this.cookieService.delete('jsonWebToken')
     localStorage.removeItem('username')
     localStorage.removeItem('roleType')
     this.isLoggedIn = false;
     this.isAdmin = false;
+    this.jsonWebToken = ''
     this.user = {
       username: '',
       roleType: ''

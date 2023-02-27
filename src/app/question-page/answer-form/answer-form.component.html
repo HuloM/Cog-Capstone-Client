@@ -33,7 +33,7 @@
                [ngClass]="{'border-danger': answerForm.get('file')?.invalid && answerForm.get('file')?.touched}" (change)="onChange($event)">
         <label for="file" class="text-dark">File Upload (max 128kb)</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" [disabled]="!answerForm.valid" (click)="onUpload()">Upload Answer</button>
+      <button class="w-100 btn btn-lg btn-primary"type="button" [disabled]="!answerForm.valid" (click)="onUpload()">Upload Answer</button>
     </form>
   </main>
 

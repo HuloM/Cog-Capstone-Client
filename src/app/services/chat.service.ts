@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service'
 import {Injectable} from '@angular/core'
+import {AuthenticationService} from './authentication.service'
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,14 @@ export class ChatService {
   chatsFromReceiver: any[] = []
   chatsToReceiver: any[] = []
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private auth: AuthenticationService) {
   }
 
   getUniqueChats = () => {
-    if (this.cookieService.get('token')) {
+    if (this.auth.jsonWebToken) {
       this.http.get(`http://localhost:8080/api/v1/chat/getChats`, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
@@ -27,18 +28,39 @@ export class ChatService {
   }
 
   createChat = (chat: { message: string, receiver: string }) => {
-    if (this.cookieService.get('token')) {
+    if (this.auth.jsonWebToken) {
       this.http.post(`http://localhost:8080/api/v1/chat/add`, {
         message: chat.message,
         receiver: chat.receiver,
         datetime: new Date()
       }, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         if(response.status === 200) {
-          window.location.reload()
+          this.getUniqueChats()
+        }
+        else if(response.status === 400) {
+          alert(response.message)
+        }
+      })
+    }
+  }
+
+  createChatFromExisting = (chat: { message: string, receiver: string }) => {
+    if (this.auth.jsonWebToken) {
+      this.http.post(`http://localhost:8080/api/v1/chat/add`, {
+        message: chat.message,
+        receiver: chat.receiver,
+        datetime: new Date()
+      }, {
+        headers: {
+          'Authorization': this.auth.jsonWebToken
+        }
+      }).subscribe((response: any) => {
+        if(response.status === 200) {
+          this.getChatWithReceiver(chat.receiver)
         }
         else if(response.status === 400) {
           alert(response.message)
@@ -48,10 +70,10 @@ export class ChatService {
   }
 
   getChatWithReceiver(to_user: any) {
-    if (this.cookieService.get('token')) {
+    if (this.auth.jsonWebToken) {
       this.http.get(`http://localhost:8080/api/v1/chat/getChatsFromSenderToReceiver/${to_user}`, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
@@ -59,7 +81,7 @@ export class ChatService {
       })
       this.http.get(`http://localhost:8080/api/v1/chat/getChatsToSenderFromReceiver/${to_user}`, {
         headers: {
-          'Authorization': this.cookieService.get('token')
+          'Authorization': this.auth.jsonWebToken
         }
       }).subscribe((response: any) => {
         console.log(response)
