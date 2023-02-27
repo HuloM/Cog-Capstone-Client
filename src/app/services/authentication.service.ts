@@ -27,9 +27,12 @@ export class AuthenticationService {
   signup = (user: {name: string, username: string, email: string,
     password: string, confirmPassword: string}) => {
     this.http.post('http://localhost:8080/api/v1/user/register', user).subscribe((response: any) => {
-      console.log(response)
+      if (response.status === 200) {
+        window.location.reload()
+      } else {
+        alert(response.message)
+      }
     })
-    this.router.navigate(['/authentication'])
   }
   signupAdmin = (admin: {name: string, username: string, email: string,
     password: string, confirmPassword: string}) => {
@@ -39,9 +42,12 @@ export class AuthenticationService {
       }
     }).subscribe((response: any) => {
 
-      console.log(response)
+      if (response.status === 200) {
+        this.router.navigate(['/'])
+      } else {
+        alert(response.message)
+      }
     })
-    this.router.navigate(['/'])
   }
 
   login = (user: {username: string, password: string}) => {
@@ -55,9 +61,11 @@ export class AuthenticationService {
         this.isAdmin = this.user.roleType === 'admin';
         localStorage.setItem('username', this.user.username)
         localStorage.setItem('roleType', this.user.roleType)
+        this.router.navigate(['/'])
+      } else {
+        alert('Invalid credentials')
       }
     })
-    this.router.navigate(['/'])
   }
 
   logout = () => {

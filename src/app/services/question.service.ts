@@ -138,7 +138,7 @@ export class QuestionService {
   getQuestionsBySearchAndTopic(search: string, topic: string) {
     if (this.cookieService.get('token')) {
       console.log(topic)
-      this.http.get(`http://localhost:8080/api/v1/question/getByTopic?topic=${topic}&title=${search}`, {
+      this.http.get(`http://localhost:8080/api/v1/question/getLikeTitleAndTopic?topic=${topic}&title=${search}`, {
         headers: {
           'Authorization': this.cookieService.get('token')
         }

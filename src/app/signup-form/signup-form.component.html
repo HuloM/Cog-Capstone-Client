@@ -82,6 +82,6 @@
              [ngClass]="{'border-danger': signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched}">
       <label for="confirmPassword">Confirm Password</label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" [disabled]="!signupForm.valid" (click)="signup($event)">Sign Up</button>
+    <button class="w-100 btn btn-lg btn-secondary" [disabled]="!signupForm.valid" (click)="signup($event)">Sign Up</button>
   </form>
 </main>

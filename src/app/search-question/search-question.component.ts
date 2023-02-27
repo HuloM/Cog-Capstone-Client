@@ -24,14 +24,18 @@ export class SearchQuestionComponent {
 
 
   onSubmit() {
-    if (this.questionSearchForm.value.topic === 'All') {
+    if (this.questionSearchForm.value.topic === 'All' && !this.questionSearchForm.value.search) {
+      console.log('All')
       this.questionService.getQuestions()
+    } else if (this.questionSearchForm.value.search && this.questionSearchForm.value.topic && this.questionSearchForm.value.topic !== 'All') {
+      console.log('Search and topic')
+      this.questionService.getQuestionsBySearchAndTopic(this.questionSearchForm.value.search, this.questionSearchForm.value.topic)
     } else if (this.questionSearchForm.value.search || (this.questionSearchForm.value.search && this.questionSearchForm.value.topic === 'All')) {
+      console.log('Search')
       this.questionService.getQuestionsBySearch(this.questionSearchForm.value.search)
     } else if (this.questionSearchForm.value.topic) {
+      console.log('Topic')
       this.questionService.getQuestionsByTopic(this.questionSearchForm.value.topic)
-    } else if (this.questionSearchForm.value.search && this.questionSearchForm.value.topic) {
-      this.questionService.getQuestionsBySearchAndTopic(this.questionSearchForm.value.search, this.questionSearchForm.value.topic)
     }
   }
 }

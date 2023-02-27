@@ -22,14 +22,12 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="form-floating">
-            <input type="text" class="form-control rounded-5" id="floatingName"
+          <div class="form-floating input-group">
+            <input type="text" class="form-control" id="floatingName" aria-describedby="button2"
                    placeholder="name" name="name" formControlName="search">
             <label for="floatingName">Question Search</label>
+          <button class="btn btn-lg btn-secondary" id="button2" (click)="onSubmit()">Search</button>
           </div>
-        </div>
-        <div class="col-sm-2 float-end h-auto">
-          <button class="w-auto btn btn-lg btn-primary rounded-5" (click)="onSubmit()">Search</button>
         </div>
       </div>
 
